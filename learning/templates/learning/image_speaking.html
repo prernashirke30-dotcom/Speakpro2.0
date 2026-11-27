@@ -1,0 +1,211 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeakPro | Image Speaking</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f7fc;
+    color: #24364b;
+}
+
+header {
+    background: #1557a5;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 { color: #1557a5; margin-bottom: 12px; }
+.subtitle { color: #68788a; margin-bottom: 25px; }
+
+.image-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+h2 { color: #1557a5; margin: 20px 0; }
+
+button {
+    background: #1557a5;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 7px;
+}
+
+button:hover { background: #0d3f7d; }
+
+#result {
+    background: #eff6ff;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 20px;
+    line-height: 1.8;
+    min-height: 65px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #68788a;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2 style="color:white;margin:0;">SpeakPro</h2>
+    <a href="/">Home</a>
+</header>
+
+<div class="container">
+
+    <h1>Image Speaking Practice</h1>
+    <p class="subtitle">
+        Look at the picture and describe it in English.
+    </p>
+
+    <div class="image-card">
+
+        <img id="practiceImage"
+       src="{% static 'learning/images/traffic.png' %}"
+        alt="City Traffic">
+
+        <h2 id="imageTitle">City Traffic</h2>
+
+        <p>What can you see in this picture?</p>
+
+        <button onclick="startSpeaking()">🎤 Start Speaking</button>
+        <button onclick="nextImage()">Next Image</button>
+
+        <div id="result">
+            Your score and feedback will appear here.
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 SpeakPro | English Learning Platform
+</footer>
+
+<script>
+
+const images = [
+    {
+       src: "{% static 'learning/traffic.png/image 6.png' %}",
+        title: "City Traffic"
+    }
+];
+];
+
+let currentIndex = 0;
+
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+
+    document.getElementById("practiceImage").src =
+        images[currentIndex].src;
+
+    document.getElementById("imageTitle").innerText =
+        images[currentIndex].title;
+
+    document.getElementById("result").innerText =
+        "Describe the new image in English.";
+}
+
+function startSpeaking() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        document.getElementById("result").innerText =
+            "Please use Google Chrome for speech recognition.";
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    document.getElementById("result").innerText =
+        "Listening... Describe the image now.";
+
+    recognition.onresult = function(event) {
+
+        const answer = event.results[0][0].transcript;
+        const words = answer.trim().split(/\s+/).filter(Boolean);
+
+        // Basic practice score based on answer length
+        let score = Math.min(100, Math.round(words.length * 4));
+
+        let feedback = "";
+
+        if (score >= 80) {
+            feedback = "Excellent! Great speaking practice.";
+        } else if (score >= 50) {
+            feedback = "Good! Try adding more details.";
+        } else {
+            feedback = "Keep Practicing! Try speaking in more sentences.";
+        }
+
+        document.getElementById("result").innerHTML =
+            "<strong>Your Answer:</strong> " + answer +
+            "<br><strong>Score:</strong> " + score + "/100" +
+            "<br><strong>Feedback:</strong> " + feedback;
+    };
+
+    recognition.onerror = function(event) {
+        document.getElementById("result").innerText =
+            "Microphone Error: " + event.error;
+    };
+
+    recognition.start();
+}
+
+</script>
+
+</body>
+</html>

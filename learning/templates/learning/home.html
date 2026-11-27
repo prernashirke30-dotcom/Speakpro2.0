@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeakPro | English Learning</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f7fc;
+    color: #24364b;
+}
+
+header {
+    background: #1557a5;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+.hero {
+    margin: 35px 7%;
+    padding: 55px 40px;
+    background: linear-gradient(120deg, #1557a5, #3988d8);
+    color: white;
+    border-radius: 18px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero button {
+    margin-top: 25px;
+    padding: 13px 28px;
+    background: white;
+    color: #1557a5;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.section {
+    padding: 20px 7% 50px;
+}
+
+.section h2 {
+    margin-bottom: 25px;
+    color: #1557a5;
+    font-size: 27px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    padding: 28px 22px;
+    border-radius: 13px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    border: 1px solid #e4edf8;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px rgba(21,87,165,0.12);
+}
+
+.card .icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #1557a5;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #68788a;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+footer {
+    background: #123e70;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+@media(max-width:600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a {
+        margin: 7px;
+        font-size: 13px;
+    }
+    .hero {
+        padding: 35px 22px;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SpeakPro</div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/login/">Login</a>
+        <a href="/register/">Register</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Welcome to SpeakPro!</h1>
+
+    <p>
+        Improve your English communication skills.
+        Learn new vocabulary, practice speaking,
+        improve listening and build confidence.
+    </p>
+
+    <button onclick="document.getElementById('learning').scrollIntoView({behavior:'smooth'})">
+        Start Learning
+    </button>
+</section>
+
+<section class="section" id="learning">
+
+    <h2>Explore Your Learning Activities</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">📚</div>
+            <h3>Categories</h3>
+            <p>Learn English through different topics and categories.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📖</div>
+            <h3>Difficult Words</h3>
+            <p>Discover difficult English words with meanings and examples.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🖼️</div>
+            <h3>Image Speaking</h3>
+            <p>Look at pictures and practice describing them in English.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">✍️</div>
+            <h3>English Exercises</h3>
+            <p>Practice grammar, vocabulary and sentence formation.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎧</div>
+            <h3>Listening Practice</h3>
+            <p>Improve your listening and understanding skills.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎤</div>
+            <h3>Speaking Practice</h3>
+            <p>Practice speaking English and build confidence.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📕</div>
+            <h3>Reading Practice</h3>
+            <p>Improve your English reading and comprehension skills.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📝</div>
+            <h3>Vocabulary Listing</h3>
+            <p>View and revise your collected English vocabulary.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 SpeakPro | English Learning Platform</p>
+</footer>
+
+</body>
+</html>

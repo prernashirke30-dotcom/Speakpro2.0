@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeakPro | Random Words</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f7fc;
+    color: #24364b;
+}
+
+header {
+    background: #1557a5;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 700px;
+    margin: 65px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #1557a5;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #68788a;
+    margin-bottom: 30px;
+}
+
+.word-card {
+    background: white;
+    padding: 45px 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.word {
+    color: #1557a5;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.meaning {
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.example {
+    color: #68788a;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+button {
+    background: #1557a5;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 6px;
+}
+
+button:hover {
+    background: #0d3f7d;
+}
+
+#result {
+    margin: 22px 0;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #68788a;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SpeakPro</div>
+    <a href="/">Home</a>
+</header>
+
+<div class="container">
+
+    <h1>Random Difficult Words</h1>
+
+    <p class="subtitle">
+        Learn a new English word and improve your vocabulary.
+    </p>
+
+    <div class="word-card">
+
+        <h2 class="word" id="word">Abundant</h2>
+
+        <p class="meaning" id="meaning">
+            Meaning: Plenty / Bahut saara
+        </p>
+
+        <p class="example" id="example">
+            Example: There is abundant food in the market.
+        </p>
+
+        <button onclick="startSpeaking()">
+            🎤 Speak Word
+        </button>
+
+        <p id="result">Click Speak Word and pronounce the word.</p>
+
+        <div style="margin:25px 0; padding:20px; background:#eff6ff; border-radius:12px;">
+
+            <h3 style="color:#1557a5;">Your Practice Score</h3>
+
+            <p>Correct Words: <span id="correctCount">0</span></p>
+
+            <p>Incorrect Words: <span id="incorrectCount">0</span></p>
+
+            <p>Total Attempts: <span id="totalAttempts">0</span></p>
+
+        </div>
+
+        <button onclick="newWord()">Next Random Word</button>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 SpeakPro | English Learning Platform
+</footer>
+
+<script>
+
+let correctCount = 0;
+let incorrectCount = 0;
+let totalAttempts = 0;
+
+const words = [
+    {
+        word: "Abundant",
+        meaning: "Plenty / Bahut saara",
+        example: "There is abundant food in the market."
+    },
+    {
+        word: "Courage",
+        meaning: "Bravery / Himmat",
+        example: "She showed courage during difficult times."
+    },
+    {
+        word: "Genuine",
+        meaning: "Real / Asli",
+        example: "He is a genuine person."
+    },
+    {
+        word: "Hesitate",
+        meaning: "To pause / Jhijhakna",
+        example: "Do not hesitate to ask questions."
+    },
+    {
+        word: "Magnificent",
+        meaning: "Very beautiful / Shaandaar",
+        example: "The palace looks magnificent."
+    },
+    {
+        word: "Confident",
+        meaning: "Self-assured / Aatmavishwasi",
+        example: "She is confident while speaking English."
+    }
+];
+
+let currentWord = words[0];
+
+function newWord() {
+
+    const randomIndex = Math.floor(Math.random() * words.length);
+    currentWord = words[randomIndex];
+
+    document.getElementById("word").innerText = currentWord.word;
+
+    document.getElementById("meaning").innerText =
+        "Meaning: " + currentWord.meaning;
+
+    document.getElementById("example").innerText =
+        "Example: " + currentWord.example;
+
+    document.getElementById("result").innerText =
+        "Click Speak Word and pronounce the word.";
+
+}
+
+function startSpeaking() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        document.getElementById("result").innerText =
+            "Speech recognition is not supported. Please use Google Chrome.";
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    document.getElementById("result").innerText =
+        "Listening... Please speak now.";
+
+    recognition.onresult = function(event) {
+
+        const spokenWord = event.results[0][0].transcript
+            .toLowerCase()
+            .trim()
+            .replace(/[.,!?]/g, "");
+
+        const correctWord = currentWord.word.toLowerCase();
+
+        if (spokenWord === correctWord) {
+
+            correctCount++;
+            totalAttempts++;
+
+            document.getElementById("result").innerText =
+                "Correct! You said: " + spokenWord + " 🎉";
+
+            document.getElementById("result").style.color = "green";
+
+        } else {
+
+            incorrectCount++;
+            totalAttempts++;
+
+            document.getElementById("result").innerText =
+                "Try Again! You said: " + spokenWord +
+                ". Correct word: " + currentWord.word;
+
+            document.getElementById("result").style.color = "red";
+
+        }
+
+        document.getElementById("correctCount").innerText = correctCount;
+        document.getElementById("incorrectCount").innerText = incorrectCount;
+        document.getElementById("totalAttempts").innerText = totalAttempts;
+
+    };
+
+    recognition.onerror = function(event) {
+
+        document.getElementById("result").innerText =
+            "Microphone error: " + event.error +
+            ". Please allow microphone access and try again.";
+
+    };
+
+    recognition.onend = function() {
+        // Listening has ended.
+    };
+
+    recognition.start();
+
+}
+
+</script>
+
+</body>
+</html>

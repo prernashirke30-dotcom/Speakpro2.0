@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeakPro | Categories</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f7fc;
+    color: #24364b;
+}
+
+header {
+    background: #1557a5;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    padding: 45px 7%;
+}
+
+h1 {
+    color: #1557a5;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #68788a;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 13px;
+    border: 1px solid #e4edf8;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #1557a5;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #68788a;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #123e70;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SpeakPro</div>
+    <a href="/">← Back to Home</a>
+</header>
+
+<div class="container">
+
+    <h1>English Learning Categories</h1>
+
+    <p class="subtitle">
+        Choose a category and improve your English communication skills.
+    </p>
+
+    <div class="categories">
+
+        <div class="card">
+            <div class="icon">🌞</div>
+            <h3>Daily Use English</h3>
+            <p>Learn common English words and sentences used in everyday life.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💼</div>
+            <h3>Interview English</h3>
+            <p>Prepare for job interviews and improve professional communication.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📘</div>
+            <h3>Basic English</h3>
+            <p>Learn basic vocabulary, grammar and simple sentences.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎓</div>
+            <h3>Advanced English</h3>
+            <p>Improve your vocabulary and learn advanced English expressions.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏢</div>
+            <h3>Business English</h3>
+            <p>Learn English for meetings, emails and workplace communication.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">✈️</div>
+            <h3>Travel English</h3>
+            <p>Practice English for travelling, hotels and asking directions.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 SpeakPro | English Learning Platform
+</footer>
+
+</body>
+</html>
