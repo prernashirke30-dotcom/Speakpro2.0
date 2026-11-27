@@ -1,0 +1,130 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | SpeakPro</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7ff;
+            color: #222;
+        }
+        header {
+            background: #3157d5;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0001;
+        }
+        h2 { color: #3157d5; }
+        button {
+            background: #3157d5;
+            color: white;
+            border: 0;
+            padding: 10px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+        select, input {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .result { font-weight: bold; margin-top: 12px; }
+        a { color: white; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>{{ title }}</h1>
+    <p>Practice English and improve your skills!</p>
+    <a href="/">Back to Home</a>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>1. Fill in the Blanks</h2>
+        <p>She _____ to school every day.</p>
+        <select id="q1">
+            <option value="">Choose Answer</option>
+            <option value="go">go</option>
+            <option value="goes">goes</option>
+            <option value="going">going</option>
+        </select>
+        <button onclick="check('q1','goes','r1')">Check Answer</button>
+        <p class="result" id="r1"></p>
+    </div>
+
+    <div class="card">
+        <h2>2. Choose the Correct Word</h2>
+        <p>What is the opposite of Happy?</p>
+        <select id="q2">
+            <option value="">Choose Answer</option>
+            <option value="Sad">Sad</option>
+            <option value="Beautiful">Beautiful</option>
+            <option value="Good">Good</option>
+        </select>
+        <button onclick="check('q2','Sad','r2')">Check Answer</button>
+        <p class="result" id="r2"></p>
+    </div>
+
+    <div class="card">
+        <h2>3. Make a Sentence</h2>
+        <p>Write a sentence using the word "Beautiful".</p>
+        <input id="q3" placeholder="Write your sentence here">
+        <button onclick="sentenceCheck()">Check Answer</button>
+        <p class="result" id="r3"></p>
+    </div>
+
+</div>
+
+<script>
+function check(question, answer, result) {
+    const selected = document.getElementById(question).value;
+    const output = document.getElementById(result);
+
+    if (!selected) {
+        output.innerText = "Please select an answer.";
+    } else if (selected === answer) {
+        output.innerText = "Correct Answer! Well done!";
+        output.style.color = "green";
+    } else {
+        output.innerText = "Incorrect. Try again!";
+        output.style.color = "red";
+    }
+}
+
+function sentenceCheck() {
+    const value = document.getElementById("q3").value.trim();
+    const output = document.getElementById("r3");
+
+    if (value.toLowerCase().includes("beautiful")) {
+        output.innerText = "Good job! You used the word correctly.";
+        output.style.color = "green";
+    } else {
+        output.innerText = 'Please write a sentence using "Beautiful".';
+        output.style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>
+```

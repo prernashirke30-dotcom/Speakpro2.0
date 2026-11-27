@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakPro | Speaking Practice</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f0f4ff;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #263b80;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .practice-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .practice-box h3 {
+            color: #263b80;
+            margin-bottom: 12px;
+        }
+
+        .sentence {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            margin: 5px;
+            color: white;
+        }
+
+        .start {
+            background: #16a34a;
+        }
+
+        .stop {
+            background: #dc2626;
+        }
+
+        .next {
+            background: #263b80;
+        }
+
+        .clear {
+            background: #64748b;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .status {
+            text-align: center;
+            color: #263b80;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .result-box {
+            background: #fff8e7;
+            border: 1px solid #f5d78e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            min-height: 100px;
+        }
+
+        .result-box h3 {
+            margin-bottom: 12px;
+            color: #805b00;
+        }
+
+        #transcript {
+            color: #333;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        #feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #16803c;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #263b80;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎤 Speaking Practice</h1>
+
+    <p class="subtitle">
+        Improve your English speaking skills with SpeakPro!
+    </p>
+
+    <div class="practice-box">
+        <h3>Practice Sentence</h3>
+
+        <p class="sentence" id="practiceSentence">
+            Hello! My name is Rahul. I want to improve my English speaking skills.
+        </p>
+
+        <button class="next" onclick="nextSentence()">
+            Next Sentence
+        </button>
+    </div>
+
+    <div class="buttons">
+        <button class="start" onclick="startSpeaking()">
+            🎤 Start Speaking
+        </button>
+
+        <button class="stop" onclick="stopSpeaking()">
+            ⏹ Stop
+        </button>
+
+        <button class="clear" onclick="clearText()">
+            Clear
+        </button>
+    </div>
+
+    <p class="status" id="status">
+        Click Start Speaking and speak in English.
+    </p>
+
+    <div class="result-box">
+        <h3>Your Spoken Words</h3>
+
+        <p id="transcript">
+            Your spoken English will appear here...
+        </p>
+
+        <p id="feedback"></p>
+    </div>
+
+    <a href="/" class="back">← Back to Home</a>
+
+</div>
+
+<script>
+    const sentences = [
+        "Hello! My name is Rahul. I want to improve my English speaking skills.",
+        "Today is a beautiful day. I am feeling very happy.",
+        "I wake up early in the morning and go for a walk.",
+        "I want to become a confident English speaker.",
+        "Practice makes a person perfect."
+    ];
+
+    let currentSentence = 0;
+    let recognition;
+    let finalTranscript = "";
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+
+        recognition.lang = "en-US";
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        recognition.onresult = function(event) {
+            let interimTranscript = "";
+
+            for (
+                let i = event.resultIndex;
+                i < event.results.length;
+                i++
+            ) {
+                const text = event.results[i][0].transcript;
+
+                if (event.results[i].isFinal) {
+                    finalTranscript += text + " ";
+                } else {
+                    interimTranscript += text;
+                }
+            }
+
+            document.getElementById("transcript").innerText =
+                finalTranscript + interimTranscript;
+        };
+
+        recognition.onstart = function() {
+            document.getElementById("status").innerText =
+                "🎤 Listening... Speak in English.";
+        };
+
+        recognition.onend = function() {
+            document.getElementById("status").innerText =
+                "Recording stopped.";
+        };
+
+        recognition.onerror = function(event) {
+            document.getElementById("status").innerText =
+                "Microphone error: " + event.error +
+                ". Check microphone permission.";
+        };
+
+    } else {
+        document.getElementById("status").innerText =
+            "Speech recognition is not supported. Please use Google Chrome.";
+    }
+
+    function startSpeaking() {
+        if (!recognition) {
+            alert("Please use Google Chrome for speaking practice.");
+            return;
+        }
+
+        try {
+            recognition.start();
+        } catch (error) {
+            document.getElementById("status").innerText =
+                "Already listening. Please speak.";
+        }
+    }
+
+    function stopSpeaking() {
+        if (recognition) {
+            recognition.stop();
+        }
+
+        giveFeedback();
+    }
+
+    function nextSentence() {
+        currentSentence =
+            (currentSentence + 1) % sentences.length;
+
+        document.getElementById("practiceSentence").innerText =
+            sentences[currentSentence];
+
+        clearText();
+    }
+
+    function clearText() {
+        finalTranscript = "";
+
+        document.getElementById("transcript").innerText =
+            "Your spoken English will appear here...";
+
+        document.getElementById("feedback").innerText = "";
+    }
+
+    function giveFeedback() {
+        setTimeout(function() {
+            const spoken = finalTranscript.trim();
+
+            const feedback =
+                document.getElementById("feedback");
+
+            if (spoken.length === 0) {
+                feedback.innerText =
+                    "Please speak something in English and try again.";
+            } else {
+                feedback.innerText =
+                    "Great job! You completed your speaking practice. Keep practicing every day!";
+            }
+        }, 500);
+    }
+</script>
+
+</body>
+</html>

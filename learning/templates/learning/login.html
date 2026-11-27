@@ -2,109 +2,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpeakPro | Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakPro | Login</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    background: #f1f6fc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #263b80, #647eea);
+            padding: 20px;
+        }
 
-.login-box {
-    background: white;
-    width: 360px;
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-}
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
 
-h1 {
-    color: #1557a5;
-    text-align: center;
-    margin-bottom: 10px;
-}
+        h1 {
+            text-align: center;
+            color: #263b80;
+            margin-bottom: 10px;
+        }
 
-p {
-    text-align: center;
-    color: #68788a;
-    margin-bottom: 25px;
-}
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 28px;
+        }
 
-label {
-    display: block;
-    margin: 15px 0 7px;
-    color: #24364b;
-}
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
 
-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccd9e8;
-    border-radius: 7px;
-}
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
 
-button {
-    width: 100%;
-    padding: 13px;
-    margin-top: 22px;
-    background: #1557a5;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 16px;
-}
+        input:focus {
+            outline: none;
+            border-color: #263b80;
+        }
 
-a {
-    color: #1557a5;
-    text-decoration: none;
-}
+        .password-box {
+            position: relative;
+        }
 
-.back {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-}
-</style>
+        .password-box input {
+            padding-right: 65px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            border: none;
+            background: none;
+            color: #263b80;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            background: #263b80;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #18295f;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 22px;
+            line-height: 2;
+        }
+
+        .links a {
+            color: #263b80;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .error {
+            color: #dc2626;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="login-container">
 
     <h1>SpeakPro</h1>
-    <p>Welcome back! Please login.</p>
 
-    <form>
-        <label>Email Address</label>
-        <input type="email" placeholder="Enter your email" required>
+    <p class="subtitle">Welcome Back! Please Login</p>
 
-        <label>Password</label>
-        <input type="password" placeholder="Enter your password" required>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
 
-        <button type="submit">Login</button>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <label for="email">Email Address</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label for="password">Password</label>
+
+        <div class="password-box">
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button
+                type="button"
+                class="show-password"
+                onclick="togglePassword()"
+            >
+                Show
+            </button>
+        </div>
+
+        <button type="submit" class="login-btn">
+            Login
+        </button>
     </form>
 
-    <p style="margin-top:20px;">
+    <div class="links">
         Don't have an account?
-        <a href="/register/">Register</a>
-    </p>
+        <a href="{% url 'register' %}">Register Here</a>
+    </div>
 
-    <a class="back" href="/">Back to Home</a>
+    <a href="/" class="home-link">← Back to Home</a>
 
 </div>
+
+<script>
+    function togglePassword() {
+        const password = document.getElementById("password");
+        const button = document.querySelector(".show-password");
+
+        if (password.type === "password") {
+            password.type = "text";
+            button.innerText = "Hide";
+        } else {
+            password.type = "password";
+            button.innerText = "Show";
+        }
+    }
+</script>
 
 </body>
 </html>

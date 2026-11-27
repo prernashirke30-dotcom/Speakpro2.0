@@ -85,6 +85,13 @@ nav a {
     gap: 22px;
 }
 
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
 .card {
     background: white;
     padding: 28px 22px;
@@ -92,11 +99,13 @@ nav a {
     box-shadow: 0 3px 15px rgba(0,0,0,0.06);
     border: 1px solid #e4edf8;
     transition: 0.3s;
+    height: 100%;
+    cursor: pointer;
 }
 
-.card:hover {
+.card-link:hover .card {
     transform: translateY(-5px);
-    box-shadow: 0 7px 20px rgba(21,87,165,0.12);
+    box-shadow: 0 7px 20px rgba(21,87,165,0.15);
 }
 
 .card .icon {
@@ -127,13 +136,16 @@ footer {
         flex-direction: column;
         gap: 15px;
     }
+
     nav a {
         margin: 7px;
         font-size: 13px;
     }
+
     .hero {
         padding: 35px 22px;
     }
+
     .hero h1 {
         font-size: 28px;
     }
@@ -147,15 +159,14 @@ footer {
     <div class="logo">SpeakPro</div>
 
     <nav>
-        <a href="/">Home</a>
-        <a href="/login/">Login</a>
-        <a href="/register/">Register</a>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
     </nav>
 </header>
 
 <section class="hero">
     <h1>Welcome to SpeakPro!</h1>
-
     <p>
         Improve your English communication skills.
         Learn new vocabulary, practice speaking,
@@ -173,56 +184,71 @@ footer {
 
     <div class="cards">
 
-        <div class="card">
-            <div class="icon">📚</div>
-            <h3>Categories</h3>
-            <p>Learn English through different topics and categories.</p>
-        </div>
+        <a href="{% url 'categories' %}" class="card-link">
+            <div class="card">
+                <div class="icon">📚</div>
+                <h3>Categories</h3>
+                <p>Learn English through different topics and categories.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">📖</div>
-            <h3>Difficult Words</h3>
-            <p>Discover difficult English words with meanings and examples.</p>
-        </div>
+        <a href="{% url 'difficult_words' %}" class="card-link">
+            <div class="card">
+                <div class="icon">📖</div>
+                <h3>Difficult Words</h3>
+                <p>Discover difficult English words with meanings and examples.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">🖼️</div>
-            <h3>Image Speaking</h3>
-            <p>Look at pictures and practice describing them in English.</p>
-        </div>
+        <a href="{% url 'image_speaking' %}" class="card-link">
+            <div class="card">
+                <div class="icon">🖼️</div>
+                <h3>Image Speaking</h3>
+                <p>Look at pictures and practice describing them in English.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">✍️</div>
-            <h3>English Exercises</h3>
-            <p>Practice grammar, vocabulary and sentence formation.</p>
-        </div>
+        <a href="{% url 'exercises' %}" class="card-link">
+            <div class="card">
+                <div class="icon">✍️</div>
+                <h3>English Exercises</h3>
+                <p>Practice grammar, vocabulary and sentence formation.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">🎧</div>
-            <h3>Listening Practice</h3>
-            <p>Improve your listening and understanding skills.</p>
-        </div>
+        <a href="{% url 'listening' %}" class="card-link">
+            <div class="card">
+                <div class="icon">🎧</div>
+                <h3>Listening Practice</h3>
+                <p>Improve your listening and understanding skills.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">🎤</div>
-            <h3>Speaking Practice</h3>
-            <p>Practice speaking English and build confidence.</p>
-        </div>
+        <a href="{% url 'speaking' %}" class="card-link">
+            <div class="card">
+                <div class="icon">🎤</div>
+                <h3>Speaking Practice</h3>
+                <p>Practice speaking English and build confidence.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">📕</div>
-            <h3>Reading Practice</h3>
-            <p>Improve your English reading and comprehension skills.</p>
-        </div>
+        <a href="{% url 'reading' %}" class="card-link">
+            <div class="card">
+                <div class="icon">📕</div>
+                <h3>Reading Practice</h3>
+                <p>Improve your English reading and comprehension skills.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">📝</div>
-            <h3>Vocabulary Listing</h3>
-            <p>View and revise your collected English vocabulary.</p>
-        </div>
+        <a href="{% url 'vocabulary' %}" class="card-link">
+            <div class="card">
+                <div class="icon">📝</div>
+                <h3>Vocabulary Listing</h3>
+                <p>View and revise your collected English vocabulary.</p>
+            </div>
+        </a>
 
     </div>
-
 </section>
 
 <footer>

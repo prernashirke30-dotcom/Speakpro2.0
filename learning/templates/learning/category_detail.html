@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.title }} - SpeakPro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            padding: 30px;
+        }
+        h1 { color: #263b80; }
+        .word-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0001;
+        }
+        .meaning { color: #16834a; }
+        a { color: #263b80; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'categories' %}">← Back to Categories</a>
+
+    <h1>{{ category.title }}</h1>
+
+    {% for item in category.words %}
+        <div class="word-card">
+            <h2>{{ item.word }}</h2>
+            <p class="meaning">Meaning: {{ item.meaning }}</p>
+            <p>Example: {{ item.example }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakPro | Reading Practice</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f0f4ff;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #263b80;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .passage {
+            background: #f0f4ff;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .passage h2 {
+            color: #263b80;
+            margin-bottom: 15px;
+        }
+
+        .passage p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .question {
+            background: #fafafa;
+            padding: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .question h3 {
+            color: #263b80;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .question label {
+            display: block;
+            padding: 7px 0;
+            cursor: pointer;
+            color: #444;
+        }
+
+        .submit {
+            display: block;
+            margin: 25px auto;
+            background: #263b80;
+            color: white;
+            border: none;
+            padding: 13px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .reset {
+            display: block;
+            margin: 10px auto;
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #16803c;
+            margin-top: 20px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #263b80;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📖 Reading Practice</h1>
+
+    <p class="subtitle">
+        Read the passage carefully and answer the questions.
+    </p>
+
+    <div class="passage">
+        <h2>A Visit to the Library</h2>
+
+        <p>
+            Last Saturday, Riya visited the city library with her brother.
+            The library was large, clean and quiet. There were many books
+            about science, history, stories and geography. Riya selected
+            a book about nature because she loves animals and plants.
+            Her brother chose a book about space and planets.
+            They sat at a table and read their books for two hours.
+            Before leaving, they returned their old books and borrowed
+            two new books. They enjoyed their visit and promised to
+            come back next Saturday.
+        </p>
+    </div>
+
+    <h2 style="color:#263b80; margin-bottom:18px;">
+        Answer the Questions
+    </h2>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <h3>1. When did Riya visit the library?</h3>
+
+            <label>
+                <input type="radio" name="q1" value="a">
+                Monday
+            </label>
+
+            <label>
+                <input type="radio" name="q1" value="b">
+                Saturday
+            </label>
+
+            <label>
+                <input type="radio" name="q1" value="c">
+                Friday
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>2. Whom did Riya visit the library with?</h3>
+
+            <label>
+                <input type="radio" name="q2" value="a">
+                Her friend
+            </label>
+
+            <label>
+                <input type="radio" name="q2" value="b">
+                Her sister
+            </label>
+
+            <label>
+                <input type="radio" name="q2" value="c">
+                Her brother
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>3. Which book did Riya select?</h3>
+
+            <label>
+                <input type="radio" name="q3" value="a">
+                A book about nature
+            </label>
+
+            <label>
+                <input type="radio" name="q3" value="b">
+                A book about history
+            </label>
+
+            <label>
+                <input type="radio" name="q3" value="c">
+                A book about sports
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>4. How long did they read?</h3>
+
+            <label>
+                <input type="radio" name="q4" value="a">
+                One hour
+            </label>
+
+            <label>
+                <input type="radio" name="q4" value="b">
+                Two hours
+            </label>
+
+            <label>
+                <input type="radio" name="q4" value="c">
+                Three hours
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>5. When did they promise to come back?</h3>
+
+            <label>
+                <input type="radio" name="q5" value="a">
+                Next Monday
+            </label>
+
+            <label>
+                <input type="radio" name="q5" value="b">
+                Next Friday
+            </label>
+
+            <label>
+                <input type="radio" name="q5" value="c">
+                Next Saturday
+            </label>
+        </div>
+
+        <button type="submit" class="submit">
+            Submit Answers
+        </button>
+
+        <button type="button" class="reset" onclick="resetQuiz()">
+            Reset Quiz
+        </button>
+
+    </form>
+
+    <div id="result"></div>
+
+    <a href="/" class="back">← Back to Home</a>
+
+</div>
+
+<script>
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const answers = {
+            q1: "b",
+            q2: "c",
+            q3: "a",
+            q4: "b",
+            q5: "c"
+        };
+
+        let score = 0;
+
+        for (let question in answers) {
+            const selected = document.querySelector(
+                'input[name="' + question + '"]:checked'
+            );
+
+            if (selected && selected.value === answers[question]) {
+                score++;
+            }
+        }
+
+        document.getElementById("result").innerText =
+            "Your Score: " + score + " / 5";
+    });
+
+    function resetQuiz() {
+        document.getElementById("quizForm").reset();
+        document.getElementById("result").innerText = "";
+    }
+</script>
+
+</body>
+</html>

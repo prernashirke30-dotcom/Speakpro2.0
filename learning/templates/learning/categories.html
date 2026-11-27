@@ -2,162 +2,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpeakPro | Categories</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | SpeakPro</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    background: #f3f7fc;
-    color: #24364b;
-}
+        body {
+            background: #f4f7fb;
+            padding: 40px 20px;
+        }
 
-header {
-    background: #1557a5;
-    color: white;
-    padding: 20px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
 
-.logo {
-    font-size: 27px;
-    font-weight: bold;
-}
+        h1 {
+            text-align: center;
+            color: #263b80;
+            margin-bottom: 10px;
+        }
 
-header a {
-    color: white;
-    text-decoration: none;
-}
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
 
-.container {
-    padding: 45px 7%;
-}
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
 
-h1 {
-    color: #1557a5;
-    margin-bottom: 12px;
-}
+        .category-card {
+            display: block;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #263b80;
+            box-shadow: 0 4px 15px #00000012;
+            transition: 0.3s;
+        }
 
-.subtitle {
-    color: #68788a;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
+        .category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 22px #00000020;
+            background: #263b80;
+            color: white;
+        }
 
-.categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 22px;
-}
+        .category-card h2 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
 
-.card {
-    background: white;
-    padding: 28px;
-    border-radius: 13px;
-    border: 1px solid #e4edf8;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
-    transition: 0.3s;
-}
+        .category-card p {
+            font-size: 14px;
+        }
 
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.icon {
-    font-size: 38px;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    color: #1557a5;
-    margin-bottom: 12px;
-}
-
-.card p {
-    color: #68788a;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-footer {
-    background: #123e70;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-}
-</style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #263b80;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-
-<header>
-    <div class="logo">SpeakPro</div>
-    <a href="/">← Back to Home</a>
-</header>
-
 <div class="container">
 
+    <a href="{% url 'home' %}" class="back-link">← Back to Home</a>
+
     <h1>English Learning Categories</h1>
+    <p class="subtitle">Choose a category and improve your English skills.</p>
 
-    <p class="subtitle">
-        Choose a category and improve your English communication skills.
-    </p>
+    <div class="category-grid">
 
-    <div class="categories">
+        <a href="{% url 'category_detail' 'daily-use' %}" class="category-card">
+            <h2>Daily Use English</h2>
+            <p>Learn everyday English words and sentences.</p>
+        </a>
 
-        <div class="card">
-            <div class="icon">🌞</div>
-            <h3>Daily Use English</h3>
-            <p>Learn common English words and sentences used in everyday life.</p>
-        </div>
+        <a href="{% url 'category_detail' 'interview' %}" class="category-card">
+            <h2>Interview English</h2>
+            <p>Prepare for interviews with useful English vocabulary.</p>
+        </a>
 
-        <div class="card">
-            <div class="icon">💼</div>
-            <h3>Interview English</h3>
-            <p>Prepare for job interviews and improve professional communication.</p>
-        </div>
+        <a href="{% url 'category_detail' 'basic' %}" class="category-card">
+            <h2>Basic English</h2>
+            <p>Build your English foundation.</p>
+        </a>
 
-        <div class="card">
-            <div class="icon">📘</div>
-            <h3>Basic English</h3>
-            <p>Learn basic vocabulary, grammar and simple sentences.</p>
-        </div>
+        <a href="{% url 'category_detail' 'advanced' %}" class="category-card">
+            <h2>Advanced English</h2>
+            <p>Improve your advanced vocabulary.</p>
+        </a>
 
-        <div class="card">
-            <div class="icon">🎓</div>
-            <h3>Advanced English</h3>
-            <p>Improve your vocabulary and learn advanced English expressions.</p>
-        </div>
+        <a href="{% url 'category_detail' 'business' %}" class="category-card">
+            <h2>Business English</h2>
+            <p>Learn professional communication words.</p>
+        </a>
 
-        <div class="card">
-            <div class="icon">🏢</div>
-            <h3>Business English</h3>
-            <p>Learn English for meetings, emails and workplace communication.</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">✈️</div>
-            <h3>Travel English</h3>
-            <p>Practice English for travelling, hotels and asking directions.</p>
-        </div>
+        <a href="{% url 'category_detail' 'travel' %}" class="category-card">
+            <h2>Travel English</h2>
+            <p>Learn English for travelling.</p>
+        </a>
 
     </div>
-
 </div>
-
-<footer>
-    © 2026 SpeakPro | English Learning Platform
-</footer>
-
 </body>
 </html>

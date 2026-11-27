@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listening Practice | SpeakPro</title>
+
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f6ff;
+}
+header {
+    background: #3157d5;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 20px;
+}
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0001;
+}
+button {
+    background: #3157d5;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin: 8px 5px 8px 0;
+}
+.question { margin: 22px 0; }
+label { display: block; margin: 10px 0; }
+.result { font-weight: bold; }
+a { color: white; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Listening Comprehension</h1>
+<p>Listen to the paragraph and answer the questions</p>
+<a href="/">Back to Home</a>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Passage 1: A Day at the Park</h2>
+
+<p>
+Listen carefully to the paragraph. You can play it again if needed.
+</p>
+
+<button onclick="playPassage()">🔊 Play Paragraph</button>
+<button onclick="stopAudio()">⏹ Stop Audio</button>
+
+<p><b>Instructions:</b> Listen to the complete paragraph and answer all five questions below.</p>
+</div>
+
+<div class="card">
+<h2>Answer the Questions</h2>
+
+<form id="quiz">
+
+<div class="question">
+<p>1. Where did Rahul go on Sunday?</p>
+<label><input type="radio" name="q1" value="a"> School</label>
+<label><input type="radio" name="q1" value="b"> Park</label>
+<label><input type="radio" name="q1" value="c"> Market</label>
+</div>
+
+<div class="question">
+<p>2. Who went with Rahul?</p>
+<label><input type="radio" name="q2" value="a"> His friends</label>
+<label><input type="radio" name="q2" value="b"> His teacher</label>
+<label><input type="radio" name="q2" value="c"> His brother</label>
+</div>
+
+<div class="question">
+<p>3. What did they play?</p>
+<label><input type="radio" name="q3" value="a"> Cricket</label>
+<label><input type="radio" name="q3" value="b"> Football</label>
+<label><input type="radio" name="q3" value="c"> Tennis</label>
+</div>
+
+<div class="question">
+<p>4. What did they eat?</p>
+<label><input type="radio" name="q4" value="a"> Pizza</label>
+<label><input type="radio" name="q4" value="b"> Ice cream</label>
+<label><input type="radio" name="q4" value="c"> Sandwiches</label>
+</div>
+
+<div class="question">
+<p>5. When did Rahul return home?</p>
+<label><input type="radio" name="q5" value="a"> In the morning</label>
+<label><input type="radio" name="q5" value="b"> In the evening</label>
+<label><input type="radio" name="q5" value="c"> At night</label>
+</div>
+
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+<button type="reset" onclick="resetResult()">Reset</button>
+
+<p id="result" class="result"></p>
+</form>
+</div>
+
+</div>
+
+<script>
+const passage = "Last Sunday, Rahul went to the park with his friends. The weather was sunny and pleasant. They played cricket for two hours. After playing, they sat under a tree and ate sandwiches. They enjoyed their day together. Rahul returned home in the evening and told his family about his wonderful day.";
+
+function playPassage() {
+    if (!window.speechSynthesis) {
+        alert("Audio is not supported in this browser.");
+        return;
+    }
+
+    speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(passage);
+    speech.lang = "en-US";
+    speech.rate = 0.8;
+
+    speechSynthesis.speak(speech);
+}
+
+function stopAudio() {
+    speechSynthesis.cancel();
+}
+
+function checkAnswers() {
+    const answers = {
+        q1: "b",
+        q2: "a",
+        q3: "a",
+        q4: "c",
+        q5: "b"
+    };
+
+    let score = 0;
+
+    for (let q in answers) {
+        const selected = document.querySelector(
+            'input[name="' + q + '"]:checked'
+        );
+
+        if (selected && selected.value === answers[q]) {
+            score++;
+        }
+    }
+
+    document.getElementById("result").innerText =
+        "Your Score: " + score + " / 5";
+
+    document.getElementById("result").style.color =
+        score >= 3 ? "green" : "red";
+}
+
+function resetResult() {
+    document.getElementById("result").innerText = "";
+}
+</script>
+
+</body>
+</html>
